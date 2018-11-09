@@ -1,0 +1,5 @@
+C:\Benner\Fontes\MundoDosJogos\MundoDosJogos\Business\LocadoraDeJogos\Benner.LocadoraDeJogos.Metodos\bin\Debug\Benner.LocadoraDeJogos.Metodos.dll
+C:\Benner\Fontes\MundoDosJogos\MundoDosJogos\Business\LocadoraDeJogos\Benner.LocadoraDeJogos.Metodos\bin\Debug\Benner.LocadoraDeJogos.Metodos.pdb
+C:\Benner\Fontes\MundoDosJogos\MundoDosJogos\Business\LocadoraDeJogos\Benner.LocadoraDeJogos.Metodos\obj\Debug\Benner.LocadoraDeJogos.Metodos.csproj.CoreCompileInputs.cache
+C:\Benner\Fontes\MundoDosJogos\MundoDosJogos\Business\LocadoraDeJogos\Benner.LocadoraDeJogos.Metodos\obj\Debug\Benner.LocadoraDeJogos.Metodos.dll
+C:\Benner\Fontes\MundoDosJogos\MundoDosJogos\Business\LocadoraDeJogos\Benner.LocadoraDeJogos.Metodos\obj\Debug\Benner.LocadoraDeJogos.Metodos.pdb

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<TaskPortable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Id>RESVEROSPEDIDOS</Id>
+  <Title>RES - Ver os pedidos</Title>
+  <Level>Benner</Level>
+  <Reports />
+  <Pages>
+    <string>PAGES_DESCONTOS_FORM</string>
+    <string>PAGES_DESCONTOS_GRID</string>
+    <string>PAGES_PEDIDOSTOTAIS</string>
+  </Pages>
+  <Components />
+  <Operations>
+    <string>DESCONTOS|DELETE</string>
+    <string>DESCONTOS|INSERT</string>
+    <string>DESCONTOS|UPDATE</string>
+    <string>DESCONTOS|VIEW</string>
+    <string>PEDIDO|APROVAR</string>
+    <string>PEDIDO|CANCELAR</string>
+    <string>PEDIDO|VIEW</string>
+  </Operations>
+  <Process />
+  <Tasks />
+</TaskPortable>

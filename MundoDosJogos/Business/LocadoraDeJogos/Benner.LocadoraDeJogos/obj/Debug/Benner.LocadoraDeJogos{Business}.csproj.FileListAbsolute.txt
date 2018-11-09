@@ -1,0 +1,9 @@
+C:\Benner\Fontes\MundoDosJogos\MundoDosJogos\Business\LocadoraDeJogos\Benner.LocadoraDeJogos\obj\Debug\Benner.LocadoraDeJogos{Business}.csproj.CoreCompileInputs.cache
+C:\Benner\Fontes\MundoDosJogos\MundoDosJogos\Business\LocadoraDeJogos\Benner.LocadoraDeJogos\obj\Debug\Benner.LocadoraDeJogos.dll
+C:\Benner\Fontes\MundoDosJogos\MundoDosJogos\Business\LocadoraDeJogos\Benner.LocadoraDeJogos\obj\Debug\Benner.LocadoraDeJogos.pdb
+C:\Benner\Install\MUNDODOSJOGOS\Benner.LocadoraDeJogos.dll
+C:\Benner\Install\MUNDODOSJOGOS\Benner.LocadoraDeJogos.pdb
+C:\Benner\Fontes\MundoDosJogos\MundoDosJogos\Business\LocadoraDeJogos\Benner.LocadoraDeJogos\obj\Debug\Benner.LocadoraDeJogos{Business}.csproj.CopyComplete
+C:\Benner\workdirs\MUNDODOSJOGOS\Benner.LocadoraDeJogos.dll
+C:\Benner\workdirs\MUNDODOSJOGOS\Benner.LocadoraDeJogos.pdb
+C:\Benner\Fontes\MundoDosJogos\MundoDosJogos\Business\LocadoraDeJogos\Benner.LocadoraDeJogos\obj\Debug\Benner.LocadoraDeJogos{Business}.csprojAssemblyReference.cache

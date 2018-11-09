@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<TaskPortable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Id>RESGERENCIARPESSOAS</Id>
+  <Title>RES - Gerenciar Pessoas</Title>
+  <Level>Benner</Level>
+  <Reports />
+  <Pages>
+    <string>PAGES_HOME</string>
+    <string>PAGES_PESSOAS_FORM</string>
+    <string>PAGES_PESSOAS_GRID</string>
+  </Pages>
+  <Components />
+  <Operations>
+    <string>PESSOAS|DELETE</string>
+    <string>PESSOAS|INSERT</string>
+    <string>PESSOAS|UPDATE</string>
+    <string>PESSOAS|VIEW</string>
+  </Operations>
+  <Process />
+  <Tasks />
+</TaskPortable>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<MenuPortable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Id>GALERIA_DE_DASHBOARDS</Id>
+  <Level>Tecnologia</Level>
+  <MenuItems>
+    <MenuItemPortable>
+      <Id>GRAFICOS</Id>
+      <Order>10</Order>
+      <Type>Page</Type>
+      <Name>Gráficos</Name>
+      <PageId>PAGES_HOME</PageId>
+      <Active>true</Active>
+      <Level>Benner</Level>
+      <CssParaIcone>fa fa-gamepad</CssParaIcone>
+    </MenuItemPortable>
+  </MenuItems>
+</MenuPortable>

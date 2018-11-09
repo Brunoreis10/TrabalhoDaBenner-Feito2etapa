@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<TaskPortable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Id>RESADICIONARPRODUTOS</Id>
+  <Title>RES - Adicionar Produtos</Title>
+  <Level>Benner</Level>
+  <Reports>
+    <string>PRODUTOS</string>
+  </Reports>
+  <Pages>
+    <string>PAGES_HOME</string>
+    <string>PAGES_PRODUTOS_FORM</string>
+    <string>PAGES_PRODUTOS_GRID</string>
+  </Pages>
+  <Components />
+  <Operations>
+    <string>ITENSPEDIDO|VIEW</string>
+    <string>PEDIDO|DELETE</string>
+    <string>PEDIDO|INSERT</string>
+    <string>PEDIDO|VIEW</string>
+    <string>PRODUTOS|ADICIONARAOCARRINHO</string>
+    <string>PRODUTOS|DELETE</string>
+    <string>PRODUTOS|INSERT</string>
+    <string>PRODUTOS|VIEW</string>
+  </Operations>
+  <Process />
+  <Tasks />
+</TaskPortable>

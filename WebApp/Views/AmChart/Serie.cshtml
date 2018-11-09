@@ -1,0 +1,356 @@
+﻿@{
+    Layout = "~/Views/Shared/_BennerLayout.cshtml";
+}
+
+<input type="hidden" id="widgetId" value="@ViewBag.WidgetId" />
+<input type="hidden" id="serieId" value="@ViewBag.SerieId" />
+<input type="hidden" id="rotate" value="@ViewBag.Rotate" />
+
+<div>
+    <div class="modal-commands">
+        <button class="btn blue" id="salvar">
+            <i class="fa fa-check"></i> Salvar
+        </button>
+        @if (ViewBag.New == false)
+        {
+            <button class="btn red" id="excluir">
+                <i class="fa fa-minus"></i> Excluir
+            </button>
+        }
+        <button class="btn default" id="cancelar" data-dismiss="modal">
+            <i class="fa fa-times"></i> Cancelar
+        </button>
+    </div>
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#tabSerie" data-toggle="tab">Série</a>
+        </li>
+        <li>
+            <a href="#tabDefinicao" data-toggle="tab">Avançado (JSON)</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tabSerie">
+            <div class="form">
+                <div class="form-body form-horizontal">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-center chart-type" id="area" serie-type="area">
+                            <img src="@Url.Content("~/content/img/amchart/area.png")" />
+                            <br />
+                            <label>Área</label>
+                            <br />
+                        </div>
+                        @if (ViewBag.ChartType == "serial")
+                        {
+                            <div class="col-md-3 col-sm-3 col-xs-3 text-center chart-type" id="bar" serie-type="column">
+                                <img src="@Url.Content("~/content/img/amchart/bar.png")" />
+                                <br />
+                                <label>Barra</label>
+                                <br />
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3 text-center chart-type" id="column" serie-type="column">
+                                <img src="@Url.Content("~/content/img/amchart/column.png")" />
+                                <br />
+                                <label>Coluna</label>
+                                <br />
+                            </div>
+                        }
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-center chart-type" id="line" serie-type="line">
+                            <img src="@Url.Content("~/content/img/amchart/line.png")" />
+                            <br />
+                            <label>Linha</label>
+                            <br />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">
+                            <div class="label-form">
+                                <div class="label-title">Campo de valor</div>
+                            </div>
+                        </label>
+                        <div>
+                            <select class="form-control" id="valor">
+                                @foreach (var field in ViewBag.Fields)
+                                {
+                                    <option value="@field.Name">@field.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">
+                            <div class="label-form">
+                                <div class="label-title">Título da série</div>
+                            </div>
+                        </label>
+                        <div>
+                            <input type="text" class="form-control" id="titulo" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">
+                            <div class="label-form">
+                                <div class="label-title">Texto do rótulo</div>
+                            </div>
+                        </label>
+                        <div>
+                            <select class="form-control" id="labelText">
+                                <option value="">Nenhum</option>
+                                <option value="[[category]] : [[value]]">Nome : Valor</option>
+                                <option value="[[category]]">Nome</option>
+                                <option value="[[value]]">Valor</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">
+                            <div class="label-form">
+                                <div class="label-title">Texto do balão</div>
+                            </div>
+                        </label>
+                        <div>
+                            <select class="form-control" id="balloonText">
+                                <option value="[[category]] : [[value]]">Nome : Valor</option>
+                                <option value="[[category]]">Nome</option>
+                                <option value="[[value]]">Valor</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">
+                            <div class="label-form">
+                                <div class="label-title">Cor</div>
+                            </div>
+                        </label>
+                        <div>
+                            <input type="text" id="cor" class="form-control minicolors-input" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="tabDefinicao">
+            <div class="note note-info">
+                <p>Veja a <a href="https://docs.amcharts.com/3/javascriptcharts/AmGraph" target="_blank">documentação</a> e o <a href="https://live.amcharts.com/new/" target="_blank">editor</a> do AmCharts e confira todas as possibilidades de customização para a série do seu gráfico.</p>
+            </div>
+            <div id="editor" style="height:380px">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="@Url.Content("~/content/assets/plugins/ace/ace.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        function getIndexOfCharts(serieId, graphs) {
+            let index = -1;
+            for (let i = 0; i < graphs.length; i++) {
+                if (graphs[i].id == serieId) {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
+
+        function updateChart(currentChart) {
+            var rotate = $('#rotate').val().toLowerCase();
+            var widgetId = $('#widgetId').val();
+            var pageId = parent.document.getElementById('page-id').value;
+            currentChart.rotate = rotate == 'true';
+
+            var url = '@Url.Content("~/")api/page/charts?pageId=' + pageId + '&widgetId=' + widgetId;
+            $.ajax({
+                type: 'PUT',
+                url: url,
+                contentType: 'application/json',
+                data: JSON.stringify(currentChart)
+            }).done(function (data) {
+                if (data) {
+                    parent.Benner.ModalPage.hide();
+                    parent.location.reload(true);
+                }
+            });
+        }
+
+        function setSerieType(chartType, serieDefinition) {
+            switch (chartType) {
+                case 'area':
+                    serieDefinition.type = 'line';
+                    serieDefinition.bullet = 'round';
+                    serieDefinition.lineAlpha = 0;
+                    serieDefinition.fillAlphas = 0.7;
+                    break;
+                case 'bar':
+                    serieDefinition.type = 'column';
+                    serieDefinition.bullet = null,
+                    $('#rotate').val(true);
+                    serieDefinition.lineAlpha = 0;
+                    serieDefinition.fillAlphas = 1;
+                    break;
+                case 'column':
+                    serieDefinition.type = 'column';
+                    serieDefinition.bullet = null;
+                    $('#rotate').val(false);
+                    serieDefinition.lineAlpha = 0;
+                    serieDefinition.fillAlphas = 1;
+                    break;
+                case 'line':
+                    serieDefinition.type = 'line';
+                    serieDefinition.bullet = 'round';
+                    serieDefinition.lineAlpha = 1;
+                    serieDefinition.fillAlphas = 0;
+                    break;
+            }
+        }
+
+        function loadUI(serieDefinition, rotate) {
+            $("#titulo").val(serieDefinition.title);
+
+            $("#valor").val(serieDefinition.valueField.toUpperCase());
+
+            if (serieDefinition.type == 'column') {
+                if (rotate == 'true') {
+                    $('#bar').addClass('selected');
+                } else {
+                    $('#column').addClass('selected');
+                }
+            }
+
+            if (serieDefinition.type == 'line') {
+                if (serieDefinition.fillAlphas > 0) {
+                    $('#area').addClass('selected');
+                } else {
+                    $('#line').addClass('selected');
+                }
+            }
+
+            if (serieDefinition.balloonText) {
+                $('#balloonText').val(serieDefinition.balloonText);
+            }
+
+            if (serieDefinition.labelText) {
+                $('#labelText').val(serieDefinition.labelText);
+            }
+
+            if (serieDefinition.fillColors) {
+                $('#cor').val(serieDefinition.fillColors);
+            }
+        }
+
+        $(function () {
+            var rotate = $("#rotate").val().toLowerCase();
+            var serieId = $('#serieId').val();
+            var editor = ace.edit('editor');
+            editor.$blockScrolling = Infinity
+
+            var currentChart = parent.Benner.AmChartsWidget.getChart($('#widgetId').val());
+            var serieDefinition = _.find(currentChart.graphs, function (graph) { return graph.id == serieId; });
+
+            if (serieDefinition == null) {
+                var type;
+
+                if (currentChart.type == 'radar')
+                    type = 'line';
+                else if (rotate == "true")
+                    type = 'bar';
+                else
+                    type = 'column';
+
+                serieDefinition = {
+                    'ballonText': '[[category]] : [[value]]',
+                    'labelText': '',
+                    'id': 'serie-' + new Date().getTime(),
+                    'title': $('#legenda').val(),
+                    'valueField': $('#valor').val(),
+                    'alphaField': 'fill_alpha_field'
+                };
+
+                setSerieType(type, serieDefinition);
+
+                currentChart.graphs.push(serieDefinition);
+            }
+            
+            loadUI(serieDefinition, rotate);
+
+            $('.minicolors-input').minicolors({ position: 'top left', theme: 'bootstrap' });
+
+            $('.chart-type').on('click', function () {
+                $('.chart-type').removeClass('selected');
+                $(this).addClass('selected');
+                $('#rotate').val(false);
+                var chartType = $(this).attr('id');
+
+                setSerieType(chartType, serieDefinition);
+            });
+
+            $('#excluir').on('click', function () {
+                let indexOf = getIndexOfCharts(serieDefinition.id, currentChart.graphs);
+                currentChart.graphs.splice(indexOf, 1);
+
+                updateChart(currentChart);
+            });
+
+            $('#salvar').on('click', function () {
+                updateChart(currentChart);
+            });
+
+            $('#cancelar').on('click', function () {
+                parent.Benner.ModalPage.hide();
+            });
+
+            $('#valor').on('change', function () {
+                serieDefinition.valueField = $(this).val().toLowerCase();
+                $("#titulo").val(serieDefinition.valueField);
+                $("#titulo").blur();
+            });
+
+            $('#balloonText').on('change', function () {
+                serieDefinition.balloonText = $(this).val();
+            });
+
+            $('#labelText').on('change', function () {
+                serieDefinition.labelText = $(this).val();
+            });
+
+            $('#titulo').on('blur', function () {
+                serieDefinition.title = $(this).val();
+            });
+
+            $('#cor').on('blur', function () {
+                if ($(this).val() != '') {
+                    serieDefinition.fillColors = $(this).val();
+                    serieDefinition.lineColor = $(this).val();
+                    serieDefinition.bulletColor = $(this).val();
+                } else {
+                    delete serieDefinition.fillColors;
+                    delete serieDefinition.bulletColor;
+                    delete serieDefinition.lineColor;
+                }
+            });
+
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (evt) {
+                var tab = $(evt.target).attr('href');
+                if (tab == '#tabDefinicao') {
+                    editor.getSession().setValue(JSON.stringify(serieDefinition, null, '\t'), 1);
+                    editor.resize();
+                } else if (tab == '#tabSerie') {
+                    loadUI(serieDefinition, rotate);
+                }
+            });
+
+            editor.on('blur', function () {
+                serieDefinition = JSON.parse(editor.getSession().getValue());
+                var oldSerieIndex = _.findIndex(currentChart.graphs, function (graph) { return graph.id == serieDefinition.id; });
+                if (oldSerieIndex >= 0) {
+                    currentChart.graphs[oldSerieIndex] = serieDefinition;
+                }
+            });
+
+            editor.getSession().setMode('ace/mode/javascript');
+            editor.getSession().setValue(JSON.stringify(serieDefinition, null, '\t'));
+        });
+    </script>
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<ScriptPortable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ViewName>PEDIDODOIS.GRID</ViewName>
+  <EntityName>PEDIDO</EntityName>
+  <Level>Benner</Level>
+  <Scripts>
+    <ScriptItemPortable>
+      <FunctionName>InitializeRow</FunctionName>
+      <LanguageName>IronPython</LanguageName>
+      <SourceCode>def InitializeRow(entity, row):
+    if(row.GetCellByName("STATUS").Text != "Em pagamento"):
+        row.GetCustomCommand("CMD_Confirmar").Enabled = False
+        row.GetCustomCommand("CMD_Recusar").Enabled = False
+</SourceCode>
+    </ScriptItemPortable>
+  </Scripts>
+</ScriptPortable>
